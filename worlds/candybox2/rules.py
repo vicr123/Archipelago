@@ -801,7 +801,7 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
     )
     rules_package.add_location_rule(
         CandyBox2LocationName.THE_HOLE_DESERT_FORTRESS_KEY_ACQUIRED,
-        can_escape_hole() & ((rule_item(CandyBox2ItemName.SPONGE) & can_jump()) | (can_brew(False))),
+        can_escape_hole() & (can_fly() | (can_brew(False) & rule_item(CandyBox2ItemName.SPONGE))),
         CandyBox2Room.QUEST_THE_HOLE,
     )
     rules_package.add_location_rule(
