@@ -4,10 +4,11 @@ import uuid
 from textwrap import dedent
 from typing import TextIO
 
-from BaseClasses import CollectionState, MultiWorld, Tutorial
+from BaseClasses import MultiWorld, Tutorial
 from entrance_rando import ERPlacementState
+from rule_builder.cached_world import CachedRuleBuilderWorld
 
-from worlds.AutoWorld import WebWorld, World
+from worlds.AutoWorld import WebWorld
 
 from .component import setup_candy_box_2_component
 from .expected_client_version import EXPECTED_CLIENT_VERSION
@@ -36,7 +37,7 @@ class CandyBox2WebWorld(WebWorld):
     bug_report_page = "https://github.com/vicr123/candy-box-2/issues"
 
 
-class CandyBox2World(World):
+class CandyBox2World(CachedRuleBuilderWorld):
     """Candy Box 2 is a text-based browser RPG that features beautiful ASCII art"""
 
     game = "Candy Box 2"
@@ -172,12 +173,12 @@ class CandyBox2World(World):
         }
 
     def set_rules(self) -> None:
-        self.multiworld.completion_condition[self.player] = lambda state: self.completion_rule(state)
+        self.set_completion_rule(self.rules_package.goal_rule)
         self.multiworld.early_items[self.player][CandyBox2ItemName.PROGRESSIVE_WORLD_MAP.value] = 1
         self.rules_package.apply_location_rules(self, self.player)
 
-    def completion_rule(self, state: CollectionState):
-        return self.rules_package.goal_rule.evaluate(self, state, self.player)
+    # def completion_rule(self, state: CollectionState):
+    #     return self.rules_package.goal_rule.evaluate(self, state, self.player)
 
     def write_spoiler(self, spoiler_handle: TextIO) -> None:
         spoiler_handle.write(f"\nCandy Box 2 Entrance randomisation for {self.player_name}:\n")
