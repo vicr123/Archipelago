@@ -1,15 +1,11 @@
 import dataclasses
-from abc import ABC, abstractmethod
 from enum import IntEnum
 from json import JSONEncoder
 from typing import TYPE_CHECKING, override
-from unittest import case
 
 from BaseClasses import CollectionState
 from NetUtils import JSONMessagePart
 from rule_builder.rules import Has, Rule, True_, CanReachLocation, False_, CanReachRegion
-
-from worlds.generic.Rules import add_rule
 
 from .expected_client_version import EXPECTED_CLIENT_VERSION
 from .items import CandyBox2ItemName, candy_box_2_base_id, items
@@ -99,167 +95,6 @@ room_parents = {
     CandyBox2Room.QUEST_THE_LEDGE_ROOM: CandyBox2Room.DESERT_FORTRESS.value,
     CandyBox2Room.QUEST_THE_X_POTION: "MENU",
 }
-
-#
-# class CandyBox2RulesPackageRuleExpression(ABC):
-#     @abstractmethod
-#     def default(self):
-#         pass
-#
-#     @abstractmethod
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         pass
-#
-#     def indirection_required(self) -> set["CandyBox2Room"]:
-#         return set()
-#
-#     def __and__(self, other):
-#         return CandyBox2RulesPackageRuleBooleanExpression("and", self, other)
-#
-#     def __or__(self, other):
-#         return CandyBox2RulesPackageRuleBooleanExpression("or", self, other)
-#
-#     def __invert__(self):
-#         return CandyBox2RulesPackageRuleUnaryExpression("not", self)
-#
-#
-# class CandyBox2RulesPackageRuleConstantExpression(CandyBox2RulesPackageRuleExpression):
-#     constant: bool
-#
-#     def __init__(self, constant: bool):
-#         super().__init__()
-#         self.constant = constant
-#
-#     def __and__(self, other):
-#         return self if self.constant == False else other  # noqa: E712
-#
-#     def __or__(self, other):
-#         return self if self.constant == True else other  # noqa: E712
-#
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         return self.constant
-#
-#     def default(self):
-#         return ["constant", self.constant]
-#
-#
-# class CandyBox2RulesPackageRuleItemExpression(CandyBox2RulesPackageRuleExpression):
-#     item: "CandyBox2ItemName"
-#     count: int
-#
-#     def __init__(self, item: "CandyBox2ItemName", count: int):
-#         super().__init__()
-#         self.item = item
-#         self.count = count
-#
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         if self.item == CandyBox2ItemName.PROGRESSIVE_WEAPON:
-#             # Special case Progressive Weapon
-#             # This check becomes false if progressive weapons aren't enabled
-#             if world.starting_weapon != -1:
-#                 return False
-#
-#         return state.has(self.item, player, self.count)
-#
-#     def default(self):
-#         return ["item", items[self.item].code, self.count]
-#
-#
-# class CandyBox2RulesPackageRuleRoomExpression(CandyBox2RulesPackageRuleExpression):
-#     room: "CandyBox2Room"
-#
-#     def __init__(self, room: "CandyBox2Room"):
-#         super().__init__()
-#         self.room = room
-#
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         return state.can_reach_region(entrance_friendly_names[self.room], player)
-#
-#     def indirection_required(self):
-#         return [self.room]
-#
-#     def default(self):
-#         return ["room", self.room.value]
-#
-#
-# class CandyBox2RulesPackageRuleLocationExpression(CandyBox2RulesPackageRuleExpression):
-#     location: "CandyBox2LocationName"
-#     id: int
-#
-#     def __init__(self, location: "CandyBox2LocationName"):
-#         super().__init__()
-#         self.location = location
-#
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         return state.can_reach_location(self.location, player)
-#
-#     def default(self):
-#         return ["location", locations[self.location].id]
-#
-#
-#
-#
-# class CandyBox2RulesPackageRuleStartWeaponExpression(CandyBox2RulesPackageRuleExpression):
-#     weapon: "CandyBox2ItemName"
-#
-#     def __init__(self, weapon: "CandyBox2ItemName"):
-#         super().__init__()
-#         self.weapon = weapon
-#
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         for item in items:
-#             if items[item].code - candy_box_2_base_id == world.starting_weapon and item == self.weapon:
-#                 return True
-#         return False
-#
-#     def default(self):
-#         return ["startWeapon", items[self.weapon].code]
-#
-#
-# class CandyBox2RulesPackageRuleBooleanExpression(CandyBox2RulesPackageRuleExpression):
-#     op1: CandyBox2RulesPackageRuleExpression
-#     op2: CandyBox2RulesPackageRuleExpression
-#     expr: str
-#
-#     def __init__(self, expr: str, op1: CandyBox2RulesPackageRuleExpression, op2: CandyBox2RulesPackageRuleExpression):
-#         super().__init__()
-#         self.op1 = op1
-#         self.op2 = op2
-#         self.expr = expr
-#
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         if self.expr == "and":
-#             return self.op1.evaluate(world, state, player) and self.op2.evaluate(world, state, player)
-#         if self.expr == "or":
-#             return self.op1.evaluate(world, state, player) or self.op2.evaluate(world, state, player)
-#         raise Exception("Tried to evaluate a boolean expression with invalid operator")
-#
-#     def default(self):
-#         return [self.expr, self.op1.default(), self.op2.default()]
-#
-#     def indirection_required(self):
-#         return {*self.op1.indirection_required(), *self.op2.indirection_required()}
-#
-#
-# class CandyBox2RulesPackageRuleUnaryExpression(CandyBox2RulesPackageRuleExpression):
-#     op: CandyBox2RulesPackageRuleExpression
-#     expr: str
-#
-#     def __init__(self, expr: str, op: CandyBox2RulesPackageRuleExpression):
-#         super().__init__()
-#         self.op = op
-#         self.expr = expr
-#
-#     def evaluate(self, world: "CandyBox2World", state: CollectionState, player: int) -> bool:
-#         if self.expr == "not":
-#             return not self.op.evaluate(world, state, player)
-#         raise Exception("Tried to evaluate a unary expression with invalid operator")
-#
-#     def indirection_required(self):
-#         return self.op.indirection_required()
-#
-#     def default(self):
-#         return [self.expr, self.op.default()]
 
 @dataclasses.dataclass()
 class HasStartWeapon(Rule["CandyBox2World"], game="Candy Box 2"):
