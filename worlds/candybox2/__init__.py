@@ -177,9 +177,6 @@ class CandyBox2World(CachedRuleBuilderWorld):
         self.multiworld.early_items[self.player][CandyBox2ItemName.PROGRESSIVE_WORLD_MAP.value] = 1
         self.rules_package.apply_location_rules(self, self.player)
 
-    # def completion_rule(self, state: CollectionState):
-    #     return self.rules_package.goal_rule.evaluate(self, state, self.player)
-
     def write_spoiler(self, spoiler_handle: TextIO) -> None:
         spoiler_handle.write(f"\nCandy Box 2 Entrance randomisation for {self.player_name}:\n")
         slot_data = self.fill_slot_data()

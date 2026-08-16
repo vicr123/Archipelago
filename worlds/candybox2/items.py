@@ -353,7 +353,7 @@ items: dict[CandyBox2ItemName, CandyBox2ItemData] = {
     ),
 }
 
-filler_items: list[str] = [CandyBox2ItemName.CANDY, CandyBox2ItemName.TWENTY_CANDIES]
+filler_items: list[str] = [CandyBox2ItemName.CANDY.value, CandyBox2ItemName.TWENTY_CANDIES.value]
 
 item_groups = {
     "Chocolate Bars": {
