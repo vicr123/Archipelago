@@ -101,7 +101,7 @@ class CandyBox2ItemName(StrEnum):
 
 
 items: dict[CandyBox2ItemName, CandyBox2ItemData] = {
-    CandyBox2ItemName.CANDY: CandyBox2ItemData(candy_box_2_base_id + 0, lambda _: 0, ItemClassification.skip_balancing),
+    CandyBox2ItemName.CANDY: CandyBox2ItemData(candy_box_2_base_id + 0, lambda _: 0, ItemClassification.skip_balancing | ItemClassification.filler),
     CandyBox2ItemName.LOLLIPOP: CandyBox2ItemData(candy_box_2_base_id + 1, lambda _: 8, ItemClassification.progression),
     CandyBox2ItemName.CHOCOLATE_BAR: CandyBox2ItemData(
         candy_box_2_base_id + 2, lambda _: 3, ItemClassification.progression
@@ -253,13 +253,13 @@ items: dict[CandyBox2ItemName, CandyBox2ItemData] = {
         candy_box_2_base_id + 46, lambda _: 1, ItemClassification.progression
     ),
     CandyBox2ItemName.TWENTY_CANDIES: CandyBox2ItemData(
-        candy_box_2_base_id + 47, lambda _: 1, ItemClassification.skip_balancing
+        candy_box_2_base_id + 47, lambda _: 1, ItemClassification.skip_balancing | ItemClassification.filler
     ),
     CandyBox2ItemName.ONE_HUNDRED_CANDIES: CandyBox2ItemData(
-        candy_box_2_base_id + 48, lambda _: 1, ItemClassification.skip_balancing
+        candy_box_2_base_id + 48, lambda _: 1, ItemClassification.skip_balancing | ItemClassification.filler
     ),
     CandyBox2ItemName.FIVE_HUNDRED_CANDIES: CandyBox2ItemData(
-        candy_box_2_base_id + 49, lambda _: 1, ItemClassification.skip_balancing
+        candy_box_2_base_id + 49, lambda _: 1, ItemClassification.skip_balancing | ItemClassification.filler
     ),
     CandyBox2ItemName.THREE_LOLLIPOPS: CandyBox2ItemData(
         candy_box_2_base_id + 50, lambda _: 1, ItemClassification.progression
