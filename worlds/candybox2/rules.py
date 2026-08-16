@@ -217,6 +217,8 @@ class CandyBox2RulesPackage(JSONEncoder):
     room_rules: dict["CandyBox2Room", Rule]
     location_parents: dict["CandyBox2LocationName", CandyBox2Room]
     room_exits: dict["CandyBox2Room", list["CandyBox2Room"]]
+    items: dict[str, str]
+    regions: dict[str, str]
     goal_rule: Rule
 
     def __init__(
@@ -248,7 +250,9 @@ class CandyBox2RulesPackage(JSONEncoder):
         self.room_rules = {}
         self.location_parents = {}
         self.room_exits = {}
-        self.goal_rule = True_
+        self.items = {}
+        self.regions = {}
+        self.goal_rule = True_()
 
     def set_goal_rule(self, goal_rule: Rule):
         self.goal_rule = goal_rule
@@ -284,6 +288,8 @@ class CandyBox2RulesPackage(JSONEncoder):
                 "rooms": {room: rule.to_dict() for room, rule in o.room_rules.items()},
             },
             "goal": o.goal_rule.to_dict(),
+            "items": o.items,
+            "regions": o.regions,
         }
 
     def apply_location_rules(self, world: "CandyBox2World", player: int):
@@ -518,6 +524,7 @@ def generate_rules_package():
     generate_rules_package_room_rules(rules_package)
     generate_rules_package_exits(rules_package)
     generate_rules_package_goal_rule(rules_package)
+    generate_rules_package_constants(rules_package)
 
     return rules_package
 
@@ -1080,3 +1087,7 @@ def generate_rules_package_goal_rule(rules_package: CandyBox2RulesPackage):
         rule_item(CandyBox2ItemName.Y_STONE) &
         rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
     )
+
+def generate_rules_package_constants(rules_package: CandyBox2RulesPackage):
+    rules_package.items = {item_data.code: item for item, item_data in items.items()}
+    rules_package.regions = {code: name for code, name in entrance_friendly_names.items()}
