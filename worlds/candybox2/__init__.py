@@ -8,7 +8,7 @@ from BaseClasses import MultiWorld, Tutorial
 from entrance_rando import ERPlacementState
 from rule_builder.cached_world import CachedRuleBuilderWorld
 
-from worlds.AutoWorld import WebWorld
+from worlds.AutoWorld import WebWorld, World
 
 from .component import setup_candy_box_2_component
 from .expected_client_version import EXPECTED_CLIENT_VERSION
@@ -37,7 +37,7 @@ class CandyBox2WebWorld(WebWorld):
     bug_report_page = "https://github.com/vicr123/candy-box-2/issues"
 
 
-class CandyBox2World(CachedRuleBuilderWorld):
+class CandyBox2World(World):
     """Candy Box 2 is a text-based browser RPG that features beautiful ASCII art"""
 
     game = "Candy Box 2"

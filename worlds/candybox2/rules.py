@@ -102,7 +102,7 @@ class HasStartWeapon(Rule["CandyBox2World"], game="Candy Box 2"):
 
     @override
     def _instantiate(self, world: "CandyBox2World") -> Rule.Resolved:
-        return self.Resolved(weapon=self.weapon, starting_weapon=world.starting_weapon, player=world.player, caching_enabled=True)
+        return self.Resolved(weapon=self.weapon, starting_weapon=world.starting_weapon, player=world.player, caching_enabled=getattr(world, "rule_caching_enabled", False))
 
     class Resolved(Rule.Resolved):
         weapon: "CandyBox2ItemName"
@@ -143,7 +143,7 @@ class HasCount(Rule["CandyBox2World"], game="Candy Box 2"):
     @override
     def _instantiate(self, world: "CandyBox2World") -> Rule.Resolved:
         return self.Resolved(item=self.item, required=self.required, inequality=self.inequality, player=world.player,
-                             caching_enabled=True)
+                             caching_enabled=getattr(world, "rule_caching_enabled", False))
 
     class Resolved(Rule.Resolved):
         item: str
@@ -450,7 +450,6 @@ def can_grow_lollipops():
         HasCount(
             "lollipop", 9, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO
         )
-        & rule_room(CandyBox2Room.LOLLIPOP_FARM)
         & rule_room(CandyBox2Room.LOLLIPOP_FARM)
     )
 
