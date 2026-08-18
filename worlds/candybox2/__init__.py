@@ -5,6 +5,7 @@ from textwrap import dedent
 from typing import TextIO
 
 from BaseClasses import MultiWorld, Tutorial
+from Options import OptionError
 from entrance_rando import ERPlacementState
 from rule_builder.cached_world import CachedRuleBuilderWorld
 
@@ -14,10 +15,10 @@ from .component import setup_candy_box_2_component
 from .expected_client_version import EXPECTED_CLIENT_VERSION
 from .items import CandyBox2Item, CandyBox2ItemName, candy_box_2_base_id, filler_items, items, item_groups
 from .locations import CandyBox2LocationName, location_descriptions, locations
-from .options import CandyBox2Options, candy_box_2_options_groups
+from .options import CandyBox2Options, candy_box_2_options_groups, GoalConditions
 from .regions import can_reach_room, connect_entrances, create_regions
 from .rooms import CandyBox2Room, entrance_friendly_names
-from .rules import CandyBox2RulesPackage, generate_rules_package
+from .rules import CandyBox2RulesPackage, generate_rules_package, generate_rules_package_goal_rule
 
 
 class CandyBox2WebWorld(WebWorld):
@@ -88,6 +89,10 @@ class CandyBox2World(World):
         return hasattr(self.multiworld, "re_gen_passthrough")
 
     def generate_early(self) -> None:
+        if all(self.options.goal_conditions[condition.value] == 0 for condition in GoalConditions):
+            raise OptionError(f"[Candy Box 2 - '{self.player_name}'] "
+                              f"No goal conditions are enabled in the YAML.")
+
         self.should_randomize_hp_bar = (
             self.multiworld.re_gen_passthrough["Candy Box 2"]["defaults"]["hpBarRandomized"]
             if self.is_ut_regen()
@@ -170,10 +175,11 @@ class CandyBox2World(World):
                 "painsAuChocolat": self.options.pain_au_chocolat_count.value,
                 "fontTraps": self.options.font_traps.value,
             },
+            "goalConditions": [condition.name for condition in GoalConditions if self.options.goal_conditions[condition.value] == 1]
         }
 
     def set_rules(self) -> None:
-        self.set_completion_rule(self.rules_package.goal_rule)
+        self.set_completion_rule(generate_rules_package_goal_rule(self))
         self.multiworld.early_items[self.player][CandyBox2ItemName.PROGRESSIVE_WORLD_MAP.value] = 1
         self.rules_package.apply_location_rules(self, self.player)
 
