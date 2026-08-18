@@ -6,6 +6,7 @@ from Options import Choice, DeathLink, DefaultOnToggle, OptionGroup, PerGameComm
 class GoalConditions(StrEnum):
     PLAY_STONES = "Obtain the PLAY Stones"
     DIE_TO_CASTLE_TRAP_ROOM = "Die to the Castle Trap Room at least once"
+    SWIM_3000_METERS = "Swim 3000 meters"
 
 class GoalCondition(OptionCounter):
     """
@@ -19,7 +20,8 @@ class GoalCondition(OptionCounter):
     max = 1
     default = {
         GoalConditions.PLAY_STONES.value: 1,
-        GoalConditions.DIE_TO_CASTLE_TRAP_ROOM.value: 0
+        GoalConditions.DIE_TO_CASTLE_TRAP_ROOM.value: 0,
+        GoalConditions.SWIM_3000_METERS.value: 0
     }
     valid_keys = [condition.value for condition in GoalConditions]
 

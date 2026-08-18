@@ -1098,13 +1098,18 @@ def generate_rules_package_rule_segment(rule_segment: GoalConditions):
     match rule_segment:
         case GoalConditions.PLAY_STONES:
             return rule_room(CandyBox2Room.TOWER) & \
-            rule_item(CandyBox2ItemName.P_STONE) & \
-            rule_item(CandyBox2ItemName.L_STONE) & \
-            rule_item(CandyBox2ItemName.A_STONE) & \
-            rule_item(CandyBox2ItemName.Y_STONE) & \
-            rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
+                rule_item(CandyBox2ItemName.P_STONE) & \
+                rule_item(CandyBox2ItemName.L_STONE) & \
+                rule_item(CandyBox2ItemName.A_STONE) & \
+                rule_item(CandyBox2ItemName.Y_STONE) & \
+                rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
         case GoalConditions.DIE_TO_CASTLE_TRAP_ROOM:
-            return rule_room(CandyBox2Room.QUEST_THE_CASTLE_TRAP_ROOM)
+            return rule_room(CandyBox2Room.QUEST_THE_CASTLE_TRAP_ROOM) & \
+                rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
+        case GoalConditions.SWIM_3000_METERS:
+            return rule_room(CandyBox2Room.QUEST_THE_SEA) & \
+                rule_location(CandyBox2LocationName.THE_PURPLE_FIN_ACQUIRED) & \
+                rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
 
 def generate_rules_package_constants(rules_package: CandyBox2RulesPackage):
     rules_package.items = {item_data.code: item for item, item_data in items.items()}
