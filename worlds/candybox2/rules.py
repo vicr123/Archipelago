@@ -9,7 +9,8 @@ from rule_builder.rules import Has, Rule, True_, CanReachLocation, False_, CanRe
 
 from .expected_client_version import EXPECTED_CLIENT_VERSION
 from .items import CandyBox2ItemName, candy_box_2_base_id, items
-from .locations import CandyBox2Location, CandyBox2LocationData, CandyBox2LocationName, locations
+from .locations import CandyBox2Location, CandyBox2LocationData, CandyBox2LocationName, locations, filler_locations, \
+    extra_location_count, lollipop_farm_filler_locations, the_sea_filler_locations
 from .options import GoalCondition, GoalConditions
 from .regions import CandyBox2Region, CandyBox2RoomRegion
 from .rooms import CandyBox2Room, entrance_friendly_names
@@ -305,6 +306,17 @@ class CandyBox2RulesPackage(JSONEncoder):
 
     def apply_room_rules(self, rooms: dict[str, CandyBox2Region], world: "CandyBox2World", player: int):
         generated_entrances = []
+        selected_filler_locations = []
+
+        # Add filler locations
+        remaining_filler_locations = filler_locations.copy()
+        for i in range(extra_location_count(world)):
+            if len(remaining_filler_locations) == 0:
+                world.raise_error("Not enough filler locations available. Please raise a bug in the Candy Box 2 channel. Include the YAML file for this player.")
+
+            selected_location = world.random.choice(remaining_filler_locations)
+            remaining_filler_locations.remove(selected_location)
+            selected_filler_locations.append(selected_location)
 
         for target, region in rooms.items():
             rule = self.room_rules.get(target)
@@ -318,7 +330,7 @@ class CandyBox2RulesPackage(JSONEncoder):
                     for location, room in self.location_parents.items()
                     if room == (None if target == "MENU" else target)
                 ]
-                if self.locations[location_name].is_included(world)
+                if location_name in selected_filler_locations or (self.locations[location_name].is_included(world) and location_name not in filler_locations)
             ]
 
             parent = room_parents.get("MENU" if target is None else target)
@@ -828,21 +840,8 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
     )
 
     # Lollipop Farm rules
-    rules_package.add_location_rule(
-        CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_1, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_2, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_3, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_4, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_5, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM
-    )
+    for location in lollipop_farm_filler_locations:
+        rules_package.add_location_rule(location, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM)
 
     # Hell rules
     rules_package.add_location_rule(
@@ -894,6 +893,24 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
         & rule_item(CandyBox2ItemName.UNICORN_HORN),
         CandyBox2Room.QUEST_THE_SEA,
     )
+
+    # Based off an initial distance of 1000m
+    # Red fin appears at about 150m
+    red_fin_appears_at = the_sea_filler_locations.index(CandyBox2LocationName.THE_SEA_EXTRA_22)
+    # Green fin appears at about 700m
+    green_fin_appears_at = the_sea_filler_locations.index(CandyBox2LocationName.THE_SEA_EXTRA_33)
+    # Purple fin appears at about 2500m
+    purple_fin_appears_at = the_sea_filler_locations.index(CandyBox2LocationName.THE_SEA_EXTRA_69)
+    for location in the_sea_filler_locations:
+        index = the_sea_filler_locations.index(location)
+        if index > (purple_fin_appears_at - green_fin_appears_at) / 2:
+            rules_package.add_location_rule(location, rule_location(CandyBox2LocationName.THE_PURPLE_FIN_ACQUIRED), CandyBox2Room.QUEST_THE_SEA)
+        elif index > (green_fin_appears_at - red_fin_appears_at) / 2:
+            rules_package.add_location_rule(location, rule_location(CandyBox2LocationName.THE_GREEN_FIN_ACQUIRED), CandyBox2Room.QUEST_THE_SEA)
+        elif index > red_fin_appears_at / 2:
+            rules_package.add_location_rule(location, rule_location(CandyBox2LocationName.THE_RED_FIN_ACQUIRED), CandyBox2Room.QUEST_THE_SEA)
+        else:
+            rules_package.add_location_rule(location, sea_entrance(), CandyBox2Room.QUEST_THE_SEA)
 
     # Cyclops Puzzle
     rules_package.add_location_rule(

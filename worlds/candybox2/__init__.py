@@ -4,6 +4,8 @@ import uuid
 from textwrap import dedent
 from typing import TextIO
 
+from _testcapi import Generic
+
 from BaseClasses import MultiWorld, Tutorial
 from Options import OptionError
 from entrance_rando import ERPlacementState
@@ -90,8 +92,7 @@ class CandyBox2World(World):
 
     def generate_early(self) -> None:
         if all(self.options.goal_conditions[condition.value] == 0 for condition in GoalConditions):
-            raise OptionError(f"[Candy Box 2 - '{self.player_name}'] "
-                              f"No goal conditions are enabled in the YAML.")
+            self.raise_error("No goal conditions are enabled in the YAML.", OptionError)
 
         self.should_randomize_hp_bar = (
             self.multiworld.re_gen_passthrough["Candy Box 2"]["defaults"]["hpBarRandomized"]
@@ -204,6 +205,9 @@ class CandyBox2World(World):
                 er_hint_data[location.address] = entrance_friendly_names[entrance]
 
         hint_data[self.player] = er_hint_data
+
+    def raise_error[T: Exception](self, error: str, error_type: Generic[T] = Exception):
+        raise error_type(f"[Candy Box 2 ({EXPECTED_CLIENT_VERSION})] {self.player_name}: {error}")
 
 
 setup_candy_box_2_component()

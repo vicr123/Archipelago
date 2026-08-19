@@ -110,6 +110,89 @@ class CandyBox2LocationName(StrEnum):
     LOLLIPOP_FARM_EXTRA_3 = "Lollipop Farm: Planted 50000 Lollipops"
     LOLLIPOP_FARM_EXTRA_4 = "Lollipop Farm: Planted 60000 Lollipops"
     LOLLIPOP_FARM_EXTRA_5 = "Lollipop Farm: Planted 70000 Lollipops"
+    LOLLIPOP_FARM_EXTRA_6 = "Lollipop Farm: Planted 80000 Lollipops"
+    LOLLIPOP_FARM_EXTRA_7 = "Lollipop Farm: Planted 90000 Lollipops"
+    LOLLIPOP_FARM_EXTRA_8 = "Lollipop Farm: Planted 100000 Lollipops"
+    THE_SEA_EXTRA_1 = "The Sea: Travel 50m"
+    THE_SEA_EXTRA_2 = "The Sea: Travel 100m"
+    THE_SEA_EXTRA_3 = "The Sea: Travel 150m"
+    THE_SEA_EXTRA_4 = "The Sea: Travel 200m"
+    THE_SEA_EXTRA_5 = "The Sea: Travel 250m"
+    THE_SEA_EXTRA_6 = "The Sea: Travel 300m"
+    THE_SEA_EXTRA_7 = "The Sea: Travel 350m"
+    THE_SEA_EXTRA_8 = "The Sea: Travel 400m"
+    THE_SEA_EXTRA_9 = "The Sea: Travel 450m"
+    THE_SEA_EXTRA_10 = "The Sea: Travel 500m"
+    THE_SEA_EXTRA_11 = "The Sea: Travel 550m"
+    THE_SEA_EXTRA_12 = "The Sea: Travel 600m"
+    THE_SEA_EXTRA_13 = "The Sea: Travel 650m"
+    THE_SEA_EXTRA_14 = "The Sea: Travel 700m"
+    THE_SEA_EXTRA_15 = "The Sea: Travel 750m"
+    THE_SEA_EXTRA_16 = "The Sea: Travel 800m"
+    THE_SEA_EXTRA_17 = "The Sea: Travel 850m"
+    THE_SEA_EXTRA_18 = "The Sea: Travel 900m"
+    THE_SEA_EXTRA_19 = "The Sea: Travel 950m"
+    THE_SEA_EXTRA_20 = "The Sea: Travel 1000m"
+    THE_SEA_EXTRA_21 = "The Sea: Travel 1050m"
+    THE_SEA_EXTRA_22 = "The Sea: Travel 1100m"
+    THE_SEA_EXTRA_23 = "The Sea: Travel 1150m"
+    THE_SEA_EXTRA_24 = "The Sea: Travel 1200m"
+    THE_SEA_EXTRA_25 = "The Sea: Travel 1250m"
+    THE_SEA_EXTRA_26 = "The Sea: Travel 1300m"
+    THE_SEA_EXTRA_27 = "The Sea: Travel 1350m"
+    THE_SEA_EXTRA_28 = "The Sea: Travel 1400m"
+    THE_SEA_EXTRA_29 = "The Sea: Travel 1450m"
+    THE_SEA_EXTRA_30 = "The Sea: Travel 1500m"
+    THE_SEA_EXTRA_31 = "The Sea: Travel 1550m"
+    THE_SEA_EXTRA_32 = "The Sea: Travel 1600m"
+    THE_SEA_EXTRA_33 = "The Sea: Travel 1650m"
+    THE_SEA_EXTRA_34 = "The Sea: Travel 1700m"
+    THE_SEA_EXTRA_35 = "The Sea: Travel 1750m"
+    THE_SEA_EXTRA_36 = "The Sea: Travel 1800m"
+    THE_SEA_EXTRA_37 = "The Sea: Travel 1850m"
+    THE_SEA_EXTRA_38 = "The Sea: Travel 1900m"
+    THE_SEA_EXTRA_39 = "The Sea: Travel 1950m"
+    THE_SEA_EXTRA_40 = "The Sea: Travel 2000m"
+    THE_SEA_EXTRA_41 = "The Sea: Travel 2050m"
+    THE_SEA_EXTRA_42 = "The Sea: Travel 2100m"
+    THE_SEA_EXTRA_43 = "The Sea: Travel 2150m"
+    THE_SEA_EXTRA_44 = "The Sea: Travel 2200m"
+    THE_SEA_EXTRA_45 = "The Sea: Travel 2250m"
+    THE_SEA_EXTRA_46 = "The Sea: Travel 2300m"
+    THE_SEA_EXTRA_47 = "The Sea: Travel 2350m"
+    THE_SEA_EXTRA_48 = "The Sea: Travel 2400m"
+    THE_SEA_EXTRA_49 = "The Sea: Travel 2450m"
+    THE_SEA_EXTRA_50 = "The Sea: Travel 2500m"
+    THE_SEA_EXTRA_51 = "The Sea: Travel 2550m"
+    THE_SEA_EXTRA_52 = "The Sea: Travel 2600m"
+    THE_SEA_EXTRA_53 = "The Sea: Travel 2650m"
+    THE_SEA_EXTRA_54 = "The Sea: Travel 2700m"
+    THE_SEA_EXTRA_55 = "The Sea: Travel 2750m"
+    THE_SEA_EXTRA_56 = "The Sea: Travel 2800m"
+    THE_SEA_EXTRA_57 = "The Sea: Travel 2850m"
+    THE_SEA_EXTRA_58 = "The Sea: Travel 2900m"
+    THE_SEA_EXTRA_59 = "The Sea: Travel 2950m"
+    THE_SEA_EXTRA_60 = "The Sea: Travel 3000m"
+    THE_SEA_EXTRA_61 = "The Sea: Travel 3050m"
+    THE_SEA_EXTRA_62 = "The Sea: Travel 3100m"
+    THE_SEA_EXTRA_63 = "The Sea: Travel 3150m"
+    THE_SEA_EXTRA_64 = "The Sea: Travel 3200m"
+    THE_SEA_EXTRA_65 = "The Sea: Travel 3250m"
+    THE_SEA_EXTRA_66 = "The Sea: Travel 3300m"
+    THE_SEA_EXTRA_67 = "The Sea: Travel 3350m"
+    THE_SEA_EXTRA_68 = "The Sea: Travel 3400m"
+    THE_SEA_EXTRA_69 = "The Sea: Travel 3450m"
+    THE_SEA_EXTRA_70 = "The Sea: Travel 3500m"
+    THE_SEA_EXTRA_71 = "The Sea: Travel 3550m"
+    THE_SEA_EXTRA_72 = "The Sea: Travel 3600m"
+    THE_SEA_EXTRA_73 = "The Sea: Travel 3650m"
+    THE_SEA_EXTRA_74 = "The Sea: Travel 3700m"
+    THE_SEA_EXTRA_75 = "The Sea: Travel 3750m"
+    THE_SEA_EXTRA_76 = "The Sea: Travel 3800m"
+    THE_SEA_EXTRA_77 = "The Sea: Travel 3850m"
+    THE_SEA_EXTRA_78 = "The Sea: Travel 3900m"
+    THE_SEA_EXTRA_79 = "The Sea: Travel 3950m"
+    THE_SEA_EXTRA_80 = "The Sea: Travel 4000m"
 
 
 location_descriptions: dict[CandyBox2LocationName, str] = {CandyBox2LocationName.HP_BAR_UNLOCK: ""}
@@ -222,22 +305,194 @@ locations: dict[CandyBox2LocationName, CandyBox2LocationData] = {
     CandyBox2LocationName.BAKE_PAIN_AU_CHOCOLAT_4: CandyBox2LocationData(4903),
     CandyBox2LocationName.BAKE_PAIN_AU_CHOCOLAT_5: CandyBox2LocationData(4904),
     CandyBox2LocationName.POGO_STICK: CandyBox2LocationData(500),
-    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_1: CandyBox2LocationData(
-        5000, lambda world: extra_location_count(world, 1)
-    ),
-    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_2: CandyBox2LocationData(
-        5001, lambda world: extra_location_count(world, 2)
-    ),
-    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_3: CandyBox2LocationData(
-        5002, lambda world: extra_location_count(world, 3)
-    ),
-    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_4: CandyBox2LocationData(
-        5003, lambda world: extra_location_count(world, 4)
-    ),
-    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_5: CandyBox2LocationData(
-        5004, lambda world: extra_location_count(world, 5)
-    ),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_1: CandyBox2LocationData(100000),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_2: CandyBox2LocationData(100001),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_3: CandyBox2LocationData(100002),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_4: CandyBox2LocationData(100003),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_5: CandyBox2LocationData(100004),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_6: CandyBox2LocationData(100005),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_7: CandyBox2LocationData(100006),
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_8: CandyBox2LocationData(100007),
+    CandyBox2LocationName.THE_SEA_EXTRA_1: CandyBox2LocationData(101000),
+    CandyBox2LocationName.THE_SEA_EXTRA_2: CandyBox2LocationData(101001),
+    CandyBox2LocationName.THE_SEA_EXTRA_3: CandyBox2LocationData(101002),
+    CandyBox2LocationName.THE_SEA_EXTRA_4: CandyBox2LocationData(101003),
+    CandyBox2LocationName.THE_SEA_EXTRA_5: CandyBox2LocationData(101004),
+    CandyBox2LocationName.THE_SEA_EXTRA_6: CandyBox2LocationData(101005),
+    CandyBox2LocationName.THE_SEA_EXTRA_7: CandyBox2LocationData(101006),
+    CandyBox2LocationName.THE_SEA_EXTRA_8: CandyBox2LocationData(101007),
+    CandyBox2LocationName.THE_SEA_EXTRA_9: CandyBox2LocationData(101008),
+    CandyBox2LocationName.THE_SEA_EXTRA_10: CandyBox2LocationData(101009),
+    CandyBox2LocationName.THE_SEA_EXTRA_11: CandyBox2LocationData(101010),
+    CandyBox2LocationName.THE_SEA_EXTRA_12: CandyBox2LocationData(101011),
+    CandyBox2LocationName.THE_SEA_EXTRA_13: CandyBox2LocationData(101012),
+    CandyBox2LocationName.THE_SEA_EXTRA_14: CandyBox2LocationData(101013),
+    CandyBox2LocationName.THE_SEA_EXTRA_15: CandyBox2LocationData(101014),
+    CandyBox2LocationName.THE_SEA_EXTRA_16: CandyBox2LocationData(101015),
+    CandyBox2LocationName.THE_SEA_EXTRA_17: CandyBox2LocationData(101016),
+    CandyBox2LocationName.THE_SEA_EXTRA_18: CandyBox2LocationData(101017),
+    CandyBox2LocationName.THE_SEA_EXTRA_19: CandyBox2LocationData(101018),
+    CandyBox2LocationName.THE_SEA_EXTRA_20: CandyBox2LocationData(101019),
+    CandyBox2LocationName.THE_SEA_EXTRA_21: CandyBox2LocationData(101020),
+    CandyBox2LocationName.THE_SEA_EXTRA_22: CandyBox2LocationData(101021),
+    CandyBox2LocationName.THE_SEA_EXTRA_23: CandyBox2LocationData(101022),
+    CandyBox2LocationName.THE_SEA_EXTRA_24: CandyBox2LocationData(101023),
+    CandyBox2LocationName.THE_SEA_EXTRA_25: CandyBox2LocationData(101024),
+    CandyBox2LocationName.THE_SEA_EXTRA_26: CandyBox2LocationData(101025),
+    CandyBox2LocationName.THE_SEA_EXTRA_27: CandyBox2LocationData(101026),
+    CandyBox2LocationName.THE_SEA_EXTRA_28: CandyBox2LocationData(101027),
+    CandyBox2LocationName.THE_SEA_EXTRA_29: CandyBox2LocationData(101028),
+    CandyBox2LocationName.THE_SEA_EXTRA_30: CandyBox2LocationData(101029),
+    CandyBox2LocationName.THE_SEA_EXTRA_31: CandyBox2LocationData(101030),
+    CandyBox2LocationName.THE_SEA_EXTRA_32: CandyBox2LocationData(101031),
+    CandyBox2LocationName.THE_SEA_EXTRA_33: CandyBox2LocationData(101032),
+    CandyBox2LocationName.THE_SEA_EXTRA_34: CandyBox2LocationData(101033),
+    CandyBox2LocationName.THE_SEA_EXTRA_35: CandyBox2LocationData(101034),
+    CandyBox2LocationName.THE_SEA_EXTRA_36: CandyBox2LocationData(101035),
+    CandyBox2LocationName.THE_SEA_EXTRA_37: CandyBox2LocationData(101036),
+    CandyBox2LocationName.THE_SEA_EXTRA_38: CandyBox2LocationData(101037),
+    CandyBox2LocationName.THE_SEA_EXTRA_39: CandyBox2LocationData(101038),
+    CandyBox2LocationName.THE_SEA_EXTRA_40: CandyBox2LocationData(101039),
+    CandyBox2LocationName.THE_SEA_EXTRA_41: CandyBox2LocationData(101040),
+    CandyBox2LocationName.THE_SEA_EXTRA_42: CandyBox2LocationData(101041),
+    CandyBox2LocationName.THE_SEA_EXTRA_43: CandyBox2LocationData(101042),
+    CandyBox2LocationName.THE_SEA_EXTRA_44: CandyBox2LocationData(101043),
+    CandyBox2LocationName.THE_SEA_EXTRA_45: CandyBox2LocationData(101044),
+    CandyBox2LocationName.THE_SEA_EXTRA_46: CandyBox2LocationData(101045),
+    CandyBox2LocationName.THE_SEA_EXTRA_47: CandyBox2LocationData(101046),
+    CandyBox2LocationName.THE_SEA_EXTRA_48: CandyBox2LocationData(101047),
+    CandyBox2LocationName.THE_SEA_EXTRA_49: CandyBox2LocationData(101048),
+    CandyBox2LocationName.THE_SEA_EXTRA_50: CandyBox2LocationData(101049),
+    CandyBox2LocationName.THE_SEA_EXTRA_51: CandyBox2LocationData(101050),
+    CandyBox2LocationName.THE_SEA_EXTRA_52: CandyBox2LocationData(101051),
+    CandyBox2LocationName.THE_SEA_EXTRA_53: CandyBox2LocationData(101052),
+    CandyBox2LocationName.THE_SEA_EXTRA_54: CandyBox2LocationData(101053),
+    CandyBox2LocationName.THE_SEA_EXTRA_55: CandyBox2LocationData(101054),
+    CandyBox2LocationName.THE_SEA_EXTRA_56: CandyBox2LocationData(101055),
+    CandyBox2LocationName.THE_SEA_EXTRA_57: CandyBox2LocationData(101056),
+    CandyBox2LocationName.THE_SEA_EXTRA_58: CandyBox2LocationData(101057),
+    CandyBox2LocationName.THE_SEA_EXTRA_59: CandyBox2LocationData(101058),
+    CandyBox2LocationName.THE_SEA_EXTRA_60: CandyBox2LocationData(101059),
+    CandyBox2LocationName.THE_SEA_EXTRA_61: CandyBox2LocationData(101060),
+    CandyBox2LocationName.THE_SEA_EXTRA_62: CandyBox2LocationData(101061),
+    CandyBox2LocationName.THE_SEA_EXTRA_63: CandyBox2LocationData(101062),
+    CandyBox2LocationName.THE_SEA_EXTRA_64: CandyBox2LocationData(101063),
+    CandyBox2LocationName.THE_SEA_EXTRA_65: CandyBox2LocationData(101064),
+    CandyBox2LocationName.THE_SEA_EXTRA_66: CandyBox2LocationData(101065),
+    CandyBox2LocationName.THE_SEA_EXTRA_67: CandyBox2LocationData(101066),
+    CandyBox2LocationName.THE_SEA_EXTRA_68: CandyBox2LocationData(101067),
+    CandyBox2LocationName.THE_SEA_EXTRA_69: CandyBox2LocationData(101068),
+    CandyBox2LocationName.THE_SEA_EXTRA_70: CandyBox2LocationData(101069),
+    CandyBox2LocationName.THE_SEA_EXTRA_71: CandyBox2LocationData(101070),
+    CandyBox2LocationName.THE_SEA_EXTRA_72: CandyBox2LocationData(101071),
+    CandyBox2LocationName.THE_SEA_EXTRA_73: CandyBox2LocationData(101072),
+    CandyBox2LocationName.THE_SEA_EXTRA_74: CandyBox2LocationData(101073),
+    CandyBox2LocationName.THE_SEA_EXTRA_75: CandyBox2LocationData(101074),
+    CandyBox2LocationName.THE_SEA_EXTRA_76: CandyBox2LocationData(101075),
+    CandyBox2LocationName.THE_SEA_EXTRA_77: CandyBox2LocationData(101076),
+    CandyBox2LocationName.THE_SEA_EXTRA_78: CandyBox2LocationData(101077),
+    CandyBox2LocationName.THE_SEA_EXTRA_79: CandyBox2LocationData(101078),
+    CandyBox2LocationName.THE_SEA_EXTRA_80: CandyBox2LocationData(101079),
 }
+
+lollipop_farm_filler_locations = [
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_1,
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_2,
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_3,
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_4,
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_5,
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_6,
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_7,
+    CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_8,
+]
+
+the_sea_filler_locations = [
+    CandyBox2LocationName.THE_SEA_EXTRA_1,
+    CandyBox2LocationName.THE_SEA_EXTRA_2,
+    CandyBox2LocationName.THE_SEA_EXTRA_3,
+    CandyBox2LocationName.THE_SEA_EXTRA_4,
+    CandyBox2LocationName.THE_SEA_EXTRA_5,
+    CandyBox2LocationName.THE_SEA_EXTRA_6,
+    CandyBox2LocationName.THE_SEA_EXTRA_7,
+    CandyBox2LocationName.THE_SEA_EXTRA_8,
+    CandyBox2LocationName.THE_SEA_EXTRA_9,
+    CandyBox2LocationName.THE_SEA_EXTRA_10,
+    CandyBox2LocationName.THE_SEA_EXTRA_11,
+    CandyBox2LocationName.THE_SEA_EXTRA_12,
+    CandyBox2LocationName.THE_SEA_EXTRA_13,
+    CandyBox2LocationName.THE_SEA_EXTRA_14,
+    CandyBox2LocationName.THE_SEA_EXTRA_15,
+    CandyBox2LocationName.THE_SEA_EXTRA_16,
+    CandyBox2LocationName.THE_SEA_EXTRA_17,
+    CandyBox2LocationName.THE_SEA_EXTRA_18,
+    CandyBox2LocationName.THE_SEA_EXTRA_19,
+    CandyBox2LocationName.THE_SEA_EXTRA_20,
+    CandyBox2LocationName.THE_SEA_EXTRA_21,
+    CandyBox2LocationName.THE_SEA_EXTRA_22,
+    CandyBox2LocationName.THE_SEA_EXTRA_23,
+    CandyBox2LocationName.THE_SEA_EXTRA_24,
+    CandyBox2LocationName.THE_SEA_EXTRA_25,
+    CandyBox2LocationName.THE_SEA_EXTRA_26,
+    CandyBox2LocationName.THE_SEA_EXTRA_27,
+    CandyBox2LocationName.THE_SEA_EXTRA_28,
+    CandyBox2LocationName.THE_SEA_EXTRA_29,
+    CandyBox2LocationName.THE_SEA_EXTRA_30,
+    CandyBox2LocationName.THE_SEA_EXTRA_31,
+    CandyBox2LocationName.THE_SEA_EXTRA_32,
+    CandyBox2LocationName.THE_SEA_EXTRA_33,
+    CandyBox2LocationName.THE_SEA_EXTRA_34,
+    CandyBox2LocationName.THE_SEA_EXTRA_35,
+    CandyBox2LocationName.THE_SEA_EXTRA_36,
+    CandyBox2LocationName.THE_SEA_EXTRA_37,
+    CandyBox2LocationName.THE_SEA_EXTRA_38,
+    CandyBox2LocationName.THE_SEA_EXTRA_39,
+    CandyBox2LocationName.THE_SEA_EXTRA_40,
+    CandyBox2LocationName.THE_SEA_EXTRA_41,
+    CandyBox2LocationName.THE_SEA_EXTRA_42,
+    CandyBox2LocationName.THE_SEA_EXTRA_43,
+    CandyBox2LocationName.THE_SEA_EXTRA_44,
+    CandyBox2LocationName.THE_SEA_EXTRA_45,
+    CandyBox2LocationName.THE_SEA_EXTRA_46,
+    CandyBox2LocationName.THE_SEA_EXTRA_47,
+    CandyBox2LocationName.THE_SEA_EXTRA_48,
+    CandyBox2LocationName.THE_SEA_EXTRA_49,
+    CandyBox2LocationName.THE_SEA_EXTRA_50,
+    CandyBox2LocationName.THE_SEA_EXTRA_51,
+    CandyBox2LocationName.THE_SEA_EXTRA_52,
+    CandyBox2LocationName.THE_SEA_EXTRA_53,
+    CandyBox2LocationName.THE_SEA_EXTRA_54,
+    CandyBox2LocationName.THE_SEA_EXTRA_55,
+    CandyBox2LocationName.THE_SEA_EXTRA_56,
+    CandyBox2LocationName.THE_SEA_EXTRA_57,
+    CandyBox2LocationName.THE_SEA_EXTRA_58,
+    CandyBox2LocationName.THE_SEA_EXTRA_59,
+    CandyBox2LocationName.THE_SEA_EXTRA_60,
+    CandyBox2LocationName.THE_SEA_EXTRA_61,
+    CandyBox2LocationName.THE_SEA_EXTRA_62,
+    CandyBox2LocationName.THE_SEA_EXTRA_63,
+    CandyBox2LocationName.THE_SEA_EXTRA_64,
+    CandyBox2LocationName.THE_SEA_EXTRA_65,
+    CandyBox2LocationName.THE_SEA_EXTRA_66,
+    CandyBox2LocationName.THE_SEA_EXTRA_67,
+    CandyBox2LocationName.THE_SEA_EXTRA_68,
+    CandyBox2LocationName.THE_SEA_EXTRA_69,
+    CandyBox2LocationName.THE_SEA_EXTRA_70,
+    CandyBox2LocationName.THE_SEA_EXTRA_71,
+    CandyBox2LocationName.THE_SEA_EXTRA_72,
+    CandyBox2LocationName.THE_SEA_EXTRA_73,
+    CandyBox2LocationName.THE_SEA_EXTRA_74,
+    CandyBox2LocationName.THE_SEA_EXTRA_75,
+    CandyBox2LocationName.THE_SEA_EXTRA_76,
+    CandyBox2LocationName.THE_SEA_EXTRA_77,
+    CandyBox2LocationName.THE_SEA_EXTRA_78,
+    CandyBox2LocationName.THE_SEA_EXTRA_79,
+    CandyBox2LocationName.THE_SEA_EXTRA_80,
+]
+
+filler_locations = [
+    *lollipop_farm_filler_locations,
+    *the_sea_filler_locations
+]
 
 
 def grimoire_location_count(world: "CandyBox2World"):
@@ -254,5 +509,5 @@ def spell_location_count(world: "CandyBox2World"):
     return False
 
 
-def extra_location_count(world: "CandyBox2World", required: int):
-    return world.font_traps >= required
+def extra_location_count(world: "CandyBox2World"):
+    return world.font_traps
