@@ -15,7 +15,7 @@ from worlds.AutoWorld import WebWorld, World
 
 from .component import setup_candy_box_2_component
 from .expected_client_version import EXPECTED_CLIENT_VERSION
-from .items import CandyBox2Item, CandyBox2ItemName, candy_box_2_base_id, filler_items, items, item_groups
+from .items import CandyBox2Item, CandyBox2ItemName, candy_box_2_base_id, filler_items, items, item_groups, create_items
 from .locations import CandyBox2LocationName, location_descriptions, locations
 from .options import CandyBox2Options, candy_box_2_options_groups, GoalConditions
 from .regions import can_reach_room, connect_entrances, create_regions
@@ -133,10 +133,7 @@ class CandyBox2World(World):
         return CandyBox2Item(name, data.classification, data.code, self.player)
 
     def create_items(self):
-        for name, data in items.items():
-            required_amount = data.required_amount(self)
-            for _ in range(required_amount):
-                self.multiworld.itempool.append(self.create_item(name.value))
+        return create_items(self)
 
     def get_filler_item_name(self) -> str:
         return self.random.choice(filler_items)
@@ -194,6 +191,10 @@ class CandyBox2World(World):
         if not self.should_randomize_hp_bar:
             self.get_location(CandyBox2LocationName.HP_BAR_UNLOCK).place_locked_item(
                 self.create_item(CandyBox2ItemName.HP_BAR)
+            )
+        if self.options.goal_conditions.value[GoalConditions.PLAY_STONES] == 1:
+            self.get_location(CandyBox2LocationName.TALKING_CANDY).place_locked_item(
+                self.create_item(CandyBox2ItemName.TALKING_CANDY)
             )
 
     def extend_hint_information(self, hint_data: dict[int, dict[int, str]]):

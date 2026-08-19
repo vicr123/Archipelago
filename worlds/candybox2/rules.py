@@ -309,14 +309,16 @@ class CandyBox2RulesPackage(JSONEncoder):
         selected_filler_locations = []
 
         # Add filler locations
-        remaining_filler_locations = filler_locations.copy()
-        for i in range(extra_location_count(world)):
-            if len(remaining_filler_locations) == 0:
-                world.raise_error("Not enough filler locations available. Please raise a bug in the Candy Box 2 channel. Include the YAML file for this player.")
+        extra_location_num = extra_location_count(world)
+        if extra_location_num > 0:
+            remaining_filler_locations = filler_locations.copy()
+            for i in range(extra_location_num):
+                if len(remaining_filler_locations) == 0:
+                    world.raise_error("Not enough filler locations available. Please raise a bug in the Candy Box 2 channel. Include the YAML file for this player.")
 
-            selected_location = world.random.choice(remaining_filler_locations)
-            remaining_filler_locations.remove(selected_location)
-            selected_filler_locations.append(selected_location)
+                selected_location = world.random.choice(remaining_filler_locations)
+                remaining_filler_locations.remove(selected_location)
+                selected_filler_locations.append(selected_location)
 
         for target, region in rooms.items():
             rule = self.room_rules.get(target)
@@ -801,6 +803,16 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
         CandyBox2Room.QUEST_THE_CASTLE_EGG_ROOM,
     )
 
+    # The Tower
+    rules_package.add_location_rule(
+        CandyBox2LocationName.TALKING_CANDY,
+        rule_item(CandyBox2ItemName.P_STONE) &
+            rule_item(CandyBox2ItemName.L_STONE) &
+            rule_item(CandyBox2ItemName.A_STONE) &
+            rule_item(CandyBox2ItemName.Y_STONE),
+        CandyBox2Room.TOWER,
+    )
+
     # The Desert Fortress
     rules_package.add_location_rule(
         CandyBox2LocationName.XINOPHERYDON_DEFEATED,
@@ -1114,11 +1126,7 @@ def generate_rules_package_goal_rule(world: "CandyBox2World | None"):
 def generate_rules_package_rule_segment(rule_segment: GoalConditions):
     match rule_segment:
         case GoalConditions.PLAY_STONES:
-            return rule_room(CandyBox2Room.TOWER) & \
-                rule_item(CandyBox2ItemName.P_STONE) & \
-                rule_item(CandyBox2ItemName.L_STONE) & \
-                rule_item(CandyBox2ItemName.A_STONE) & \
-                rule_item(CandyBox2ItemName.Y_STONE) & \
+            return rule_item(CandyBox2ItemName.TALKING_CANDY) & \
                 rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
         case GoalConditions.DIE_TO_CASTLE_TRAP_ROOM:
             return rule_room(CandyBox2Room.QUEST_THE_CASTLE_TRAP_ROOM) & \

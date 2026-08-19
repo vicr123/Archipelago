@@ -3,6 +3,7 @@ from enum import StrEnum
 from typing import TYPE_CHECKING, NamedTuple
 
 from BaseClasses import Location
+from .options import GoalConditions
 
 if TYPE_CHECKING:
     from . import CandyBox2World
@@ -105,6 +106,7 @@ class CandyBox2LocationName(StrEnum):
     BAKE_PAIN_AU_CHOCOLAT_4 = "Castle Bakehouse: Bake Pain au Chocolat 4"
     BAKE_PAIN_AU_CHOCOLAT_5 = "Castle Bakehouse: Bake Pain au Chocolat 5"
     POGO_STICK = "The Mountains: Pogo Stick"
+    TALKING_CANDY = "The Tower: Take the Talking Candy"
     LOLLIPOP_FARM_EXTRA_1 = "Lollipop Farm: Planted 30000 Lollipops"
     LOLLIPOP_FARM_EXTRA_2 = "Lollipop Farm: Planted 40000 Lollipops"
     LOLLIPOP_FARM_EXTRA_3 = "Lollipop Farm: Planted 50000 Lollipops"
@@ -212,6 +214,7 @@ locations: dict[CandyBox2LocationName, CandyBox2LocationData] = {
     CandyBox2LocationName.VILLAGE_HOUSE_LOLLIPOP_IN_THE_BOOKSHELF: CandyBox2LocationData(201),
     CandyBox2LocationName.VILLAGE_HOUSE_LOLLIPOP_UNDER_THE_RUG: CandyBox2LocationData(202),
     CandyBox2LocationName.CELLAR_QUEST_CLEARED: CandyBox2LocationData(300),
+    CandyBox2LocationName.POGO_STICK: CandyBox2LocationData(500),
     CandyBox2LocationName.DESERT_QUEST_CLEARED: CandyBox2LocationData(1100),
     CandyBox2LocationName.DESERT_BIRD_FEATHER_ACQUIRED: CandyBox2LocationData(1101),
     CandyBox2LocationName.TROLL_DEFEATED: CandyBox2LocationData(1200),
@@ -304,7 +307,7 @@ locations: dict[CandyBox2LocationName, CandyBox2LocationData] = {
     CandyBox2LocationName.BAKE_PAIN_AU_CHOCOLAT_3: CandyBox2LocationData(4902),
     CandyBox2LocationName.BAKE_PAIN_AU_CHOCOLAT_4: CandyBox2LocationData(4903),
     CandyBox2LocationName.BAKE_PAIN_AU_CHOCOLAT_5: CandyBox2LocationData(4904),
-    CandyBox2LocationName.POGO_STICK: CandyBox2LocationData(500),
+    CandyBox2LocationName.TALKING_CANDY: CandyBox2LocationData(5000),
     CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_1: CandyBox2LocationData(100000),
     CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_2: CandyBox2LocationData(100001),
     CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_3: CandyBox2LocationData(100002),
@@ -510,4 +513,11 @@ def spell_location_count(world: "CandyBox2World"):
 
 
 def extra_location_count(world: "CandyBox2World"):
-    return world.font_traps
+    extras = 0
+    extras += world.font_traps
+
+    if world.options.goal_conditions.value[GoalConditions.PLAY_STONES] == 0:
+        # We don't have the talking candy location, but we still have the item
+        extras -= 1
+
+    return extras
