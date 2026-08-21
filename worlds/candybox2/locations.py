@@ -1041,6 +1041,17 @@ filler_locations = [
     *the_sea_filler_locations
 ]
 
+def generate_filter_categories():
+    lollipop_farm = lollipop_farm_filler_locations.copy()
+    the_sea = the_sea_filler_locations.copy()
+
+    return [
+        # Make the lollipop farm more likely
+        lollipop_farm,
+        lollipop_farm,
+        the_sea
+    ]
+
 def extra_location_count(world: "CandyBox2World"):
     extras = 0
     extras += world.font_traps

@@ -10,7 +10,8 @@ from rule_builder.rules import Has, Rule, True_, CanReachLocation, False_, CanRe
 from .expected_client_version import EXPECTED_CLIENT_VERSION
 from .items import CandyBox2ItemName, candy_box_2_base_id, items
 from .locations import CandyBox2Location, CandyBox2LocationData, CandyBox2LocationName, locations, filler_locations, \
-    extra_location_count, lollipop_farm_filler_locations, the_sea_filler_locations
+    extra_location_count, lollipop_farm_filler_locations, the_sea_filler_locations, \
+    generate_filter_categories
 from .options import GoalCondition, GoalConditions
 from .regions import CandyBox2Region, CandyBox2RoomRegion
 from .rooms import CandyBox2Room, entrance_friendly_names
@@ -311,13 +312,17 @@ class CandyBox2RulesPackage(JSONEncoder):
         # Add filler locations
         extra_location_num = extra_location_count(world)
         if extra_location_num > 0:
-            remaining_filler_locations = filler_locations.copy()
+            current_filter_categories = generate_filter_categories()
+
             for i in range(extra_location_num):
-                if len(remaining_filler_locations) == 0:
+                non_empty_filler_categories = [category for category in current_filter_categories if len(category) > 0]
+                if len(non_empty_filler_categories) == 0:
                     world.raise_error("Not enough filler locations available. Please raise a bug in the Candy Box 2 channel. Include the YAML file for this player.")
 
-                selected_location = world.random.choice(remaining_filler_locations)
-                remaining_filler_locations.remove(selected_location)
+                # Select a random category
+                selected_filter_category = world.random.choice(non_empty_filler_categories)
+                selected_location = world.random.choice(selected_filter_category)
+                selected_filter_category.remove(selected_location)
                 selected_filler_locations.append(selected_location)
 
         for target, region in rooms.items():
