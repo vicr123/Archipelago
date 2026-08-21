@@ -687,12 +687,12 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
     # Bridge rules
     rules_package.add_location_rule(
         CandyBox2LocationName.TROLL_DEFEATED,
-        weapon_is_at_least(CandyBox2ItemName.POLISHED_SILVER_SWORD),
+        weapon_is_at_least(CandyBox2ItemName.POLISHED_SILVER_SWORD) | rule_item(CandyBox2ItemName.PURPLE_FIN),
         CandyBox2Room.QUEST_THE_BRIDGE,
     )
     rules_package.add_location_rule(
         CandyBox2LocationName.THE_TROLLS_BLUDGEON_ACQUIRED,
-        weapon_is_at_least(CandyBox2ItemName.POLISHED_SILVER_SWORD),
+        weapon_is_at_least(CandyBox2ItemName.POLISHED_SILVER_SWORD) | rule_item(CandyBox2ItemName.PURPLE_FIN),
         CandyBox2Room.QUEST_THE_BRIDGE,
     )
 
@@ -702,18 +702,18 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
     rules_package.add_location_rule(CandyBox2LocationName.CAVE_EXIT, no_conditions(), CandyBox2Room.CAVE)
     rules_package.add_location_rule(
         CandyBox2LocationName.OCTOPUS_KING_DEFEATED,
-        rule_item(CandyBox2ItemName.SORCERESS_CAULDRON)
+        (rule_item(CandyBox2ItemName.SORCERESS_CAULDRON)
         & weapon_is_at_least(CandyBox2ItemName.TROLLS_BLUDGEON)
-        & armor_is_at_least(CandyBox2ItemName.LIGHTWEIGHT_BODY_ARMOUR),
+        & armor_is_at_least(CandyBox2ItemName.LIGHTWEIGHT_BODY_ARMOUR) | rule_item(CandyBox2ItemName.PURPLE_FIN)),
         CandyBox2Room.QUEST_THE_OCTOPUS_KING,
     )
     rules_package.add_location_rule(
         CandyBox2LocationName.MONKEY_WIZARD_DEFEATED,
-        rule_item(CandyBox2ItemName.BOOTS_OF_INTROSPECTION)
+        (rule_item(CandyBox2ItemName.BOOTS_OF_INTROSPECTION)
         & can_cast(CandyBox2Castable.TELEPORT)
         & rule_item(CandyBox2ItemName.OCTOPUS_KING_CROWN_WITH_JASPERS)
         & weapon_is_at_least(CandyBox2ItemName.TROLLS_BLUDGEON)
-        & armor_is_at_least(CandyBox2ItemName.LIGHTWEIGHT_BODY_ARMOUR),
+        & armor_is_at_least(CandyBox2ItemName.LIGHTWEIGHT_BODY_ARMOUR) | rule_item(CandyBox2ItemName.PURPLE_FIN)),
         CandyBox2Room.QUEST_THE_NAKED_MONKEY_WIZARD,
     )
 
@@ -920,7 +920,8 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
         & can_cast(CandyBox2Castable.ERASE_MAGIC)
         & rule_item(CandyBox2ItemName.PINK_ENCHANTED_GLOVES)
         & rule_item(CandyBox2ItemName.OCTOPUS_KING_CROWN_WITH_JASPERS)
-        & rule_item(CandyBox2ItemName.UNICORN_HORN),
+        & rule_item(CandyBox2ItemName.UNICORN_HORN)
+        & rule_item(CandyBox2ItemName.SPONGE),
         CandyBox2Room.QUEST_THE_SEA,
     )
 
