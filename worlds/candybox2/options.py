@@ -209,7 +209,7 @@ class FontTrap(Range):
 
     display_name = "Font Traps"
     range_start = 0
-    range_end = 5
+    range_end = 20
     default = 0
 
 
