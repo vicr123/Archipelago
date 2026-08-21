@@ -722,16 +722,6 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
         CandyBox2Room.QUEST_THE_HOLE,
     )
     rules_package.add_location_rule(
-        CandyBox2LocationName.THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED_OBSIDIAN_WALL,
-        can_escape_hole() & rule_item(CandyBox2ItemName.SPONGE),
-        CandyBox2Room.QUEST_THE_HOLE,
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED_BLACK_DEMONS,
-        can_escape_hole() & rule_item(CandyBox2ItemName.SPONGE),
-        CandyBox2Room.QUEST_THE_HOLE,
-    )
-    rules_package.add_location_rule(
         CandyBox2LocationName.THE_HOLE_DESERT_FORTRESS_KEY_ACQUIRED,
         can_escape_hole() & (can_fly() | (can_brew(False) & rule_item(CandyBox2ItemName.SPONGE))),
         CandyBox2Room.QUEST_THE_HOLE,
@@ -958,32 +948,7 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
         CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE, can_grow_lollipops(), CandyBox2Room.SORCERESS_HUT
     )
     rules_package.add_location_rule(
-        CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE_ACID_RAIN,
-        can_grow_lollipops(),
-        CandyBox2Room.SORCERESS_HUT,
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE_FIREBALL,
-        can_grow_lollipops(),
-        CandyBox2Room.SORCERESS_HUT,
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE_TELEPORT,
-        can_grow_lollipops(),
-        CandyBox2Room.SORCERESS_HUT,
-    )
-    rules_package.add_location_rule(
         CandyBox2LocationName.SORCERESS_HUT_ADVANCED_GRIMOIRE, can_grow_lollipops(), CandyBox2Room.SORCERESS_HUT
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.SORCERESS_HUT_ADVANCED_GRIMOIRE_THORNS_SHIELD,
-        can_grow_lollipops(),
-        CandyBox2Room.SORCERESS_HUT,
-    )
-    rules_package.add_location_rule(
-        CandyBox2LocationName.SORCERESS_HUT_ADVANCED_GRIMOIRE_ERASE_MAGIC,
-        can_grow_lollipops(),
-        CandyBox2Room.SORCERESS_HUT,
     )
     rules_package.add_location_rule(
         CandyBox2LocationName.SORCERESS_HUT_HAT, can_farm_lollipops(), CandyBox2Room.SORCERESS_HUT

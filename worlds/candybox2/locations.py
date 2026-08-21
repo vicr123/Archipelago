@@ -47,11 +47,6 @@ class CandyBox2LocationName(StrEnum):
     SORCERESS_HUT_LOLLIPOP_ON_THE_SHELVES = "Sorceress' Hut: Inconspicuous Lollipop"
     SORCERESS_HUT_BEGINNERS_GRIMOIRE = "Sorceress' Hut: Beginner's Grimoire"
     SORCERESS_HUT_ADVANCED_GRIMOIRE = "Sorceress' Hut: Advanced Grimoire"
-    SORCERESS_HUT_BEGINNERS_GRIMOIRE_FIREBALL = "Sorceress' Hut: Beginner's Grimoire - Fireball"
-    SORCERESS_HUT_BEGINNERS_GRIMOIRE_ACID_RAIN = "Sorceress' Hut: Beginner's Grimoire - Acid Rain"
-    SORCERESS_HUT_BEGINNERS_GRIMOIRE_TELEPORT = "Sorceress' Hut: Beginner's Grimoire - Teleport"
-    SORCERESS_HUT_ADVANCED_GRIMOIRE_ERASE_MAGIC = "Sorceress' Hut: Advanced Grimoire - Erase Magic"
-    SORCERESS_HUT_ADVANCED_GRIMOIRE_THORNS_SHIELD = "Sorceress' Hut: Advanced Grimoire - Thorns Shield"
     SORCERESS_HUT_CAULDRON = "Sorceress' Hut: Cauldron"
     SORCERESS_HUT_HAT = "Sorceress' Hut: Sorceress' Hat"
     OCTOPUS_KING_DEFEATED = "Octopus King Quest: Octopus King Defeated"
@@ -78,8 +73,6 @@ class CandyBox2LocationName(StrEnum):
     THE_HOLE_DESERT_FORTRESS_KEY_ACQUIRED = "Hole: Right Chest Opened"
     THE_HOLE_HEART_PENDANT_ACQUIRED = "Hole: Top Chest Opened"
     THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED = "Hole: Left Chest Opened"
-    THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED_OBSIDIAN_WALL = "Hole: Left Chest Opened - Obsidian Wall"
-    THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED_BLACK_DEMONS = "Hole: Left Chest Opened - Black Demons"
     THE_HOLE_FOUR_CHOCOLATE_BARS_ACQUIRED = "Hole: Bottom Chest Opened"
     TEAPOT_DEFEATED = "Teapot Quest: Teapot Defeated"
     XINOPHERYDON_DEFEATED = "Xinopherydon Quest: Xinopherydon Defeated"
@@ -227,29 +220,10 @@ locations: dict[CandyBox2LocationName, CandyBox2LocationData] = {
     CandyBox2LocationName.KNIGHT_BODY_ARMOUR_ACQUIRED: CandyBox2LocationData(1501),
     CandyBox2LocationName.GIANT_NOUGAT_MONSTER_DEFEATED: CandyBox2LocationData(1600),
     CandyBox2LocationName.SORCERESS_HUT_LOLLIPOP_ON_THE_SHELVES: CandyBox2LocationData(1800),
-    CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE: CandyBox2LocationData(
-        1801, lambda world: grimoire_location_count(world)
-    ),
-    CandyBox2LocationName.SORCERESS_HUT_ADVANCED_GRIMOIRE: CandyBox2LocationData(
-        1802, lambda world: grimoire_location_count(world)
-    ),
+    CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE: CandyBox2LocationData(1801),
+    CandyBox2LocationName.SORCERESS_HUT_ADVANCED_GRIMOIRE: CandyBox2LocationData(1802),
     CandyBox2LocationName.SORCERESS_HUT_CAULDRON: CandyBox2LocationData(1803),
     CandyBox2LocationName.SORCERESS_HUT_HAT: CandyBox2LocationData(1804),
-    CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE_ACID_RAIN: CandyBox2LocationData(
-        1805, lambda world: spell_location_count(world)
-    ),
-    CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE_FIREBALL: CandyBox2LocationData(
-        1806, lambda world: spell_location_count(world)
-    ),
-    CandyBox2LocationName.SORCERESS_HUT_BEGINNERS_GRIMOIRE_TELEPORT: CandyBox2LocationData(
-        1807, lambda world: spell_location_count(world)
-    ),
-    CandyBox2LocationName.SORCERESS_HUT_ADVANCED_GRIMOIRE_ERASE_MAGIC: CandyBox2LocationData(
-        1808, lambda world: spell_location_count(world)
-    ),
-    CandyBox2LocationName.SORCERESS_HUT_ADVANCED_GRIMOIRE_THORNS_SHIELD: CandyBox2LocationData(
-        1809, lambda world: spell_location_count(world)
-    ),
     CandyBox2LocationName.OCTOPUS_KING_DEFEATED: CandyBox2LocationData(1900),
     CandyBox2LocationName.MONKEY_WIZARD_DEFEATED: CandyBox2LocationData(2000),
     CandyBox2LocationName.EGG_ROOM_QUEST_CLEARED: CandyBox2LocationData(2100),
@@ -273,16 +247,8 @@ locations: dict[CandyBox2LocationName, CandyBox2LocationData] = {
     CandyBox2LocationName.THE_HOLE_TRIBAL_WARRIOR_DEFEATED: CandyBox2LocationData(3700),
     CandyBox2LocationName.THE_HOLE_DESERT_FORTRESS_KEY_ACQUIRED: CandyBox2LocationData(3701),
     CandyBox2LocationName.THE_HOLE_HEART_PENDANT_ACQUIRED: CandyBox2LocationData(3702),
-    CandyBox2LocationName.THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED: CandyBox2LocationData(
-        3703, lambda world: grimoire_location_count(world)
-    ),
+    CandyBox2LocationName.THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED: CandyBox2LocationData(3703),
     CandyBox2LocationName.THE_HOLE_FOUR_CHOCOLATE_BARS_ACQUIRED: CandyBox2LocationData(3704),
-    CandyBox2LocationName.THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED_OBSIDIAN_WALL: CandyBox2LocationData(
-        3705, lambda world: spell_location_count(world)
-    ),
-    CandyBox2LocationName.THE_HOLE_BLACK_MAGIC_GRIMOIRE_ACQUIRED_BLACK_DEMONS: CandyBox2LocationData(
-        3706, lambda world: spell_location_count(world)
-    ),
     CandyBox2LocationName.TEAPOT_DEFEATED: CandyBox2LocationData(3900),
     CandyBox2LocationName.XINOPHERYDON_DEFEATED: CandyBox2LocationData(4000),
     CandyBox2LocationName.XINOPHERYDON_QUEST_UNICORN_HORN_ACQUIRED: CandyBox2LocationData(4001),
@@ -497,24 +463,13 @@ filler_locations = [
     *the_sea_filler_locations
 ]
 
-
-def grimoire_location_count(world: "CandyBox2World"):
-    if world.grimoires == 0 or world.grimoires == 1:  # Grimoires
-        return True
-
-    return False
-
-
-def spell_location_count(world: "CandyBox2World"):
-    if world.grimoires == 2:
-        return True
-
-    return False
-
-
 def extra_location_count(world: "CandyBox2World"):
     extras = 0
     extras += world.font_traps
+
+    if world.grimoires == 2:
+        # Individual spells add extra locations for each extra spell that can be obtained
+        extras += 4
 
     if world.options.goal_conditions.value[GoalConditions.PLAY_STONES] == 0:
         # We don't have the talking candy location, but we still have the item
