@@ -843,7 +843,30 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
 
     # Lollipop Farm rules
     for location in lollipop_farm_filler_locations:
-        rules_package.add_location_rule(location, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM)
+        match location:
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_1:
+                rules_package.add_location_rule(location, HasCount("lollipop", 1, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_2:
+                rules_package.add_location_rule(location, HasCount("lollipop", 2, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_3:
+                rules_package.add_location_rule(location, HasCount("lollipop", 3, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_4:
+                rules_package.add_location_rule(location, HasCount("lollipop", 4, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_5:
+                rules_package.add_location_rule(location, HasCount("lollipop", 5, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_6:
+                rules_package.add_location_rule(location, HasCount("lollipop", 6, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_7:
+                rules_package.add_location_rule(location, HasCount("lollipop", 7, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_8:
+                rules_package.add_location_rule(location, HasCount("lollipop", 8, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_9:
+                rules_package.add_location_rule(location, HasCount("lollipop", 9, RuleCountInequality.GREATER_THAN_OR_EQUAL_TO), CandyBox2Room.LOLLIPOP_FARM)
+            case _:
+                if lollipop_farm_filler_locations.index(location) < lollipop_farm_filler_locations.index(CandyBox2LocationName.LOLLIPOP_FARM_EXTRA_100):
+                    rules_package.add_location_rule(location, can_grow_lollipops(), CandyBox2Room.LOLLIPOP_FARM)
+                else:
+                    rules_package.add_location_rule(location, can_farm_lollipops(), CandyBox2Room.LOLLIPOP_FARM)
 
     # Hell rules
     rules_package.add_location_rule(
