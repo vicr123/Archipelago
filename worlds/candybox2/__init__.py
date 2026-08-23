@@ -4,12 +4,9 @@ import uuid
 from textwrap import dedent
 from typing import TextIO
 
-from _testcapi import Generic
-
 from BaseClasses import MultiWorld, Tutorial
 from Options import OptionError
 from entrance_rando import ERPlacementState
-from rule_builder.cached_world import CachedRuleBuilderWorld
 
 from worlds.AutoWorld import WebWorld, World
 
@@ -207,7 +204,7 @@ class CandyBox2World(World):
 
         hint_data[self.player] = er_hint_data
 
-    def raise_error[T: Exception](self, error: str, error_type: Generic[T] = Exception):
+    def raise_error(self, error: str, error_type: type[Exception] = Exception):
         raise error_type(f"[Candy Box 2 ({EXPECTED_CLIENT_VERSION})] {self.player_name}: {error}")
 
 
