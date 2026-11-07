@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - "candy-box-2"
+      - "fork/tower-of-babel"
   release:
     types:
       - created
