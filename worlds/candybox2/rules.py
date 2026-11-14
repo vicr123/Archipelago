@@ -752,9 +752,11 @@ def generate_rules_package_location_rules(rules_package: CandyBox2RulesPackage):
     # The Forest rules
     rules_package.add_location_rule(
         CandyBox2LocationName.FOREST_QUEST_CLEARED,
-        weapon_is_at_least(CandyBox2ItemName.ENCHANTED_MONKEY_WIZARD_STAFF)
-        & rule_item(CandyBox2ItemName.OCTOPUS_KING_CROWN_WITH_JASPERS)
-        & armor_is_at_least(CandyBox2ItemName.LIGHTWEIGHT_BODY_ARMOUR),
+            (
+                weapon_is_at_least(CandyBox2ItemName.ENCHANTED_MONKEY_WIZARD_STAFF) &
+                rule_item(CandyBox2ItemName.OCTOPUS_KING_CROWN_WITH_JASPERS) &
+                armor_is_at_least(CandyBox2ItemName.LIGHTWEIGHT_BODY_ARMOUR)
+            ) | can_fly(),
         CandyBox2Room.QUEST_THE_FOREST,
     )
 
