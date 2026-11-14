@@ -1,29 +1,28 @@
 from dataclasses import dataclass
-from enum import StrEnum
 
 from Options import Choice, DeathLink, DefaultOnToggle, OptionGroup, PerGameCommonOptions, Range, Toggle, OptionCounter
 
-class GoalConditions(StrEnum):
-    PLAY_STONES = "Obtain the PLAY Stones"
-    DIE_TO_CASTLE_TRAP_ROOM = "Die to the Castle Trap Room at least once"
-    SWIM_3000_METERS = "Swim 3000 meters"
-
-class GoalCondition(OptionCounter):
+class GoalPlayStones(DefaultOnToggle):
     """
-    The conditions required to complete the game.
+    True if you want to require the PLAY stones to complete the game.
 
-    At least one condition must be set.
-    Regardless of your goal condition, you still need the Locked Candy Box.
+    In the event that no goal condition is set, this will be forcibly set as the only goal condition.
     """
-    display_name = "Goal Conditions"
-    min = 0
-    max = 1
-    default = {
-        GoalConditions.PLAY_STONES.value: 1,
-        GoalConditions.DIE_TO_CASTLE_TRAP_ROOM.value: 0,
-        GoalConditions.SWIM_3000_METERS.value: 0
-    }
-    valid_keys = [condition.value for condition in GoalConditions]
+
+    display_name = "Require PLAY Stones"
+
+
+class GoalDieToCastleTrapRoom(Toggle):
+    """True if you want to require that you die at least onee in the Castle Trap Room to complete the game."""
+
+    display_name = "Require Death in Trap Room"
+
+
+class GoalSwim(Toggle):
+    """True if you want to require that you swim at least 3000 meters to complete the game."""
+
+    display_name = "Require Swimming 3000 Meters in the sea"
+
 
 class QuestRandomisation(Choice):
     """
@@ -230,6 +229,7 @@ class RandomiseXPotion(DefaultOnToggle):
 
 
 candy_box_2_options_groups = [
+    OptionGroup("Goal", [GoalPlayStones, GoalDieToCastleTrapRoom, GoalSwim]),
     OptionGroup("Entrances", [QuestRandomisation, RandomiseTowerEntrance, RandomiseXPotion]),
     OptionGroup(
         "Inventory Customisation", [StartingWeapon, ProgressiveJump, Grimoire, PainAuChocolatCount, RandomiseHpBar]
@@ -251,7 +251,9 @@ candy_box_2_options_groups = [
 
 @dataclass
 class CandyBox2Options(PerGameCommonOptions):
-    goal_conditions: GoalCondition
+    goal_play_stones: GoalPlayStones
+    goal_die_to_castle_trap_room: GoalDieToCastleTrapRoom
+    goal_swim: GoalSwim
     quest_randomisation: QuestRandomisation
     randomise_tower: RandomiseTowerEntrance
     randomise_x_potion: RandomiseXPotion

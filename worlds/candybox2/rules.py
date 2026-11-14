@@ -1,5 +1,5 @@
 import dataclasses
-from enum import IntEnum
+from enum import IntEnum, StrEnum
 from json import JSONEncoder
 from typing import TYPE_CHECKING, override
 
@@ -12,13 +12,12 @@ from .items import CandyBox2ItemName, candy_box_2_base_id, items
 from .locations import CandyBox2Location, CandyBox2LocationData, CandyBox2LocationName, locations, filler_locations, \
     extra_location_count, lollipop_farm_filler_locations, the_sea_filler_locations, \
     generate_filter_categories
-from .options import GoalCondition, GoalConditions
 from .regions import CandyBox2Region, CandyBox2RoomRegion
 from .rooms import CandyBox2Room, entrance_friendly_names
+from .goal_condition import GoalCondition
 
 if TYPE_CHECKING:
     from . import CandyBox2World
-
 
 weapons = [
     CandyBox2ItemName.NOTHING_WEAPON,
@@ -544,7 +543,7 @@ def generate_rules_package():
     generate_rules_package_exits(rules_package)
     generate_rules_package_constants(rules_package)
 
-    for condition in GoalConditions:
+    for condition in GoalCondition:
         rules_package.set_goal_rule(condition.name, generate_rules_package_rule_segment(condition))
 
     return rules_package
@@ -1103,29 +1102,25 @@ def generate_rules_package_exits(rules_package: CandyBox2RulesPackage):
     )
     rules_package.assign_room_exits(CandyBox2Room.DRAGON, [CandyBox2Room.QUEST_THE_DEVELOPER, CandyBox2Room.QUEST_HELL])
 
-def generate_rules_package_goal_rule(world: "CandyBox2World | None"):
+def generate_rules_package_goal_rule(world: "CandyBox2World"):
     goal_rule = True_()
 
-    goal_conditions = GoalCondition(GoalCondition.default)
+    goal_conditions = world.goal_conditions()
 
-    if world is not None:
-        goal_conditions = world.options.goal_conditions
-
-    for condition in GoalConditions:
-        if goal_conditions.value[condition.value] == 1:
-            goal_rule &= generate_rules_package_rule_segment(condition)
+    for condition in goal_conditions:
+        goal_rule &= generate_rules_package_rule_segment(condition)
 
     return goal_rule
 
-def generate_rules_package_rule_segment(rule_segment: GoalConditions):
+def generate_rules_package_rule_segment(rule_segment: GoalCondition):
     match rule_segment:
-        case GoalConditions.PLAY_STONES:
+        case GoalCondition.PLAY_STONES:
             return rule_item(CandyBox2ItemName.TALKING_CANDY) & \
                 rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
-        case GoalConditions.DIE_TO_CASTLE_TRAP_ROOM:
+        case GoalCondition.DIE_TO_CASTLE_TRAP_ROOM:
             return rule_room(CandyBox2Room.QUEST_THE_CASTLE_TRAP_ROOM) & \
                 rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)
-        case GoalConditions.SWIM_3000_METERS:
+        case GoalCondition.SWIM_3000_METERS:
             return rule_room(CandyBox2Room.QUEST_THE_SEA) & \
                 rule_location(CandyBox2LocationName.THE_PURPLE_FIN_ACQUIRED) & \
                 rule_item(CandyBox2ItemName.LOCKED_CANDY_BOX)

@@ -1,11 +1,11 @@
 import logging
+import time
 import typing
 import uuid
 from textwrap import dedent
 from typing import TextIO
 
 from BaseClasses import MultiWorld, Tutorial
-from Options import OptionError
 from entrance_rando import ERPlacementState
 
 from worlds.AutoWorld import WebWorld, World
@@ -14,10 +14,11 @@ from .component import setup_candy_box_2_component
 from .expected_client_version import EXPECTED_CLIENT_VERSION
 from .items import CandyBox2Item, CandyBox2ItemName, candy_box_2_base_id, filler_items, items, item_groups, create_items
 from .locations import CandyBox2LocationName, location_descriptions, locations
-from .options import CandyBox2Options, candy_box_2_options_groups, GoalConditions
+from .options import CandyBox2Options, candy_box_2_options_groups
 from .regions import can_reach_room, connect_entrances, create_regions
 from .rooms import CandyBox2Room, entrance_friendly_names
-from .rules import CandyBox2RulesPackage, generate_rules_package, generate_rules_package_goal_rule
+from .rules import CandyBox2RulesPackage, generate_rules_package, generate_rules_package_goal_rule, GoalCondition
+from .warnings import CandyBox2Warning, CandyBox2UnstableApworldWarning, CandyBox2NoGoalConditionWarning
 
 
 class CandyBox2WebWorld(WebWorld):
@@ -61,6 +62,9 @@ class CandyBox2World(World):
     original_entrances: list[tuple[str, str]]
     calculated_entrances: list[tuple[str, str]]
 
+    generation_start: float | int = 0
+    warnings: list[CandyBox2Warning] = []
+
     rules_package: CandyBox2RulesPackage = generate_rules_package()
 
     def __init__(self, multiworld, player):
@@ -73,23 +77,21 @@ class CandyBox2World(World):
 
     @staticmethod
     def stage_generate_early(multiworld: MultiWorld):
+        CandyBox2World.generation_start = time.monotonic()
         logging.info(f"Candy Box 2: Client Version: {EXPECTED_CLIENT_VERSION}")
         if EXPECTED_CLIENT_VERSION.endswith("+"):
-            warning = """
-            Candy Box 2: <!> Warning! You are generating this game using a non-stable version of the apworld.
-                             If you plan to play this game with an async, it is recommended that you go back
-                             and use the stable version. If you decide to continue anyway, when you start
-                             the game, bookmark the "Permalink to this version" in the bottom left corner of
-                             the game, and ensure you use this version to play.
-                      """
-            logging.warning(dedent(warning))
+            warning = CandyBox2UnstableApworldWarning()
+            warning.issue_warning()
+            CandyBox2World.warnings += [warning]
 
     def is_ut_regen(self):
         return hasattr(self.multiworld, "re_gen_passthrough")
 
     def generate_early(self) -> None:
-        if all(self.options.goal_conditions[condition.value] == 0 for condition in GoalConditions):
-            self.raise_error("No goal conditions are enabled in the YAML.", OptionError)
+        if GoalCondition.PLAY_STONES in self.goal_conditions() and self.options.goal_play_stones.value == False:
+            warning = CandyBox2NoGoalConditionWarning(self)
+            warning.issue_warning()
+            CandyBox2World.warnings += [warning]
 
         self.should_randomize_hp_bar = (
             self.multiworld.re_gen_passthrough["Candy Box 2"]["defaults"]["hpBarRandomized"]
@@ -141,6 +143,21 @@ class CandyBox2World(World):
     def interpret_slot_data(self, slot):
         return slot
 
+    def goal_conditions(self) -> list[GoalCondition]:
+        goal_conditions = []
+        if self.options.goal_play_stones.value:
+            goal_conditions += [GoalCondition.PLAY_STONES]
+        if self.options.goal_die_to_castle_trap_room.value:
+            goal_conditions += [GoalCondition.DIE_TO_CASTLE_TRAP_ROOM]
+        if self.options.goal_swim.value:
+            goal_conditions += [GoalCondition.SWIM_3000_METERS]
+
+        if len(goal_conditions) == 0:
+            # Fallback goal condition
+            goal_conditions += [GoalCondition.PLAY_STONES]
+
+        return goal_conditions
+
     def fill_slot_data(self) -> dict[str, typing.Any]:
         return {
             "uuid": str(uuid.uuid4()),
@@ -170,8 +187,22 @@ class CandyBox2World(World):
                 "painsAuChocolat": self.options.pain_au_chocolat_count.value,
                 "fontTraps": self.options.font_traps.value,
             },
-            "goalConditions": [condition.name for condition in GoalConditions if self.options.goal_conditions[condition.value] == 1]
+            "goalConditions": [condition.name for condition in self.goal_conditions()]
         }
+
+
+    @staticmethod
+    def stage_write_spoiler_end(multiworld: MultiWorld, spoiler_handle: TextIO):
+        # Only repeat the warnings if some time has passed
+        if time.monotonic() - CandyBox2World.generation_start > 10:
+            if len(CandyBox2World.warnings) > 0:
+                logging.warning("Generation warnings for Candy Box 2:")
+
+                CandyBox2World.warnings.sort()
+                for warning in CandyBox2World.warnings:
+                    warning.issue_warning()
+
+        CandyBox2World.warnings.clear()
 
     def set_rules(self) -> None:
         self.set_completion_rule(generate_rules_package_goal_rule(self))
@@ -189,7 +220,7 @@ class CandyBox2World(World):
             self.get_location(CandyBox2LocationName.HP_BAR_UNLOCK).place_locked_item(
                 self.create_item(CandyBox2ItemName.HP_BAR)
             )
-        if self.options.goal_conditions.value[GoalConditions.PLAY_STONES] == 1:
+        if GoalCondition.PLAY_STONES in self.goal_conditions():
             self.get_location(CandyBox2LocationName.TALKING_CANDY).place_locked_item(
                 self.create_item(CandyBox2ItemName.TALKING_CANDY)
             )

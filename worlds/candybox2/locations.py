@@ -3,7 +3,7 @@ from enum import StrEnum
 from typing import TYPE_CHECKING, NamedTuple
 
 from BaseClasses import Location
-from .options import GoalConditions
+from .goal_condition import GoalCondition
 
 if TYPE_CHECKING:
     from . import CandyBox2World
@@ -1060,7 +1060,7 @@ def extra_location_count(world: "CandyBox2World"):
         # Individual spells add extra locations for each extra spell that can be obtained
         extras += 4
 
-    if world.options.goal_conditions.value[GoalConditions.PLAY_STONES] == 0:
+    if GoalCondition.PLAY_STONES not in world.goal_conditions():
         # We don't have the talking candy location, but we still have the item
         extras -= 1
 
